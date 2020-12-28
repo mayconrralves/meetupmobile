@@ -9,7 +9,6 @@ import {
 
 
 export default function SignUp({ navigation }){
-	console.warn('teste')
 	return (
 		<View style={styles.main}>
 					<TextInput style={styles.input} />
