@@ -1,25 +1,25 @@
 import React from 'react';
 import { 
-	 View,
-	 TextInput,
-	 TouchableOpacity,
-	 Text, 
-	 StyleSheet,
-	 Button
- } from 'react-native';
+	View,
+	StyleSheet,
+	Text,
+	TextInput,
+	TouchableOpacity,
+} from 'react-native';
 
 
-export default function SignIn({ navigation }){
-
+export default function SignUp({ navigation }){
+	console.warn('teste')
 	return (
-			<View style={styles.main}>
+		<View style={styles.main}>
 					<TextInput style={styles.input} />
 					<TextInput style={styles.input} />
-					<TouchableOpacity style={styles.buttonLogin} >
-						<Text style={styles.textLogin}>Login</Text>
+					<TextInput style={styles.input} />
+					<TouchableOpacity style={styles.buttonLogin}>
+						<Text style={styles.textLogin}>Cadastrar</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={()=> navigation.navigate('SignUp')}>
-						<Text style={styles.textSignUp} >Não tenho Conta</Text>
+					<TouchableOpacity onPress={()=> navigation.navigate('SignIn')}>
+						<Text style={styles.textSignUp}>Já tenho Conta</Text>
 					</TouchableOpacity>
 			</View>
 		)
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 
 	},
-	input: {
+	input : {
 		height: 60,
 		width: '95%',
 		backgroundColor: '#FFF',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 	textLogin: {
 		color: '#fff',
 		fontSize: 24,
-		fontWeight: 'bold',
+		fontWeight: 'bold'
 	},
 	textSignUp: {
 		color: '#fff',
