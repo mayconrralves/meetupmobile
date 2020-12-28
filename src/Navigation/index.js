@@ -7,17 +7,17 @@ import Dashboard from '../screens/Dashboard';
 import Profile from '../screens/Profile';
 import Enrollment from '../screens/Enrollment';
 export default function Navigation(){
-	const signin = false;
+	const signin = true;
 	const Stack = createStackNavigator();
 	const Tab = createBottomTabNavigator();
 	return signin ? (
-		<Stack.Navigator initialRouteName='Dashboard'>
+		<Stack.Navigator initialRouteName='Dashboard'  headerMode='none'>
 			<Tab.Screen name="Dashboard" component={Dashboard} />
 			<Tab.Screen name="Profile" component={Profile} />
 			<Tab.Screen name="Enrollment" component={Enrollment} />
 		</Stack.Navigator>
 		):(
-		<Stack.Navigator initialRouteName='SignIn'>
+		<Stack.Navigator initialRouteName='SignIn' headerMode='none'>
 			<Stack.Screen name='SignIn' component={SignIn}/>
 			<Stack.Screen name='SignUp' component={SignUp} />
 		</Stack.Navigator>
