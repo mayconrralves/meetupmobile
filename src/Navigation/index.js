@@ -7,7 +7,7 @@ import Dashboard from '../screens/Dashboard';
 import Profile from '../screens/Profile';
 import Enrollment from '../screens/Enrollment';
 export default function Navigation(){
-	const signin = true;
+	const signin = false;
 	const Stack = createStackNavigator();
 	const Tab = createBottomTabNavigator();
 	return signin ? (

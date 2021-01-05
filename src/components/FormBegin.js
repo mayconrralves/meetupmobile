@@ -12,7 +12,7 @@ import {
 import Background from '../components/Background';
 import Title from './Title';
 
-export default function FormBegin({ navigation, signup }){
+export default function FormBegin({ navigation, signup, email, password, setEmail, setPassword, save }){
 	const placeholderColor = 'rgba(255,255,255, 0.4)';
 	return (
 		<Background >
@@ -28,9 +28,10 @@ export default function FormBegin({ navigation, signup }){
 					<TextInput 
 						style={styles.input} 
 						placeholderTextColor={placeholderColor}
-						textContentType='email'  
+						textContentType='emailAddress'  
 						placeholder='Seu e-mail...'
-						autoCapitalize='none' 
+						autoCapitalize='none'
+						onChangeText={(email) => setEmail(email)}
 					/>
 					<TextInput 
 						style={styles.input} 
@@ -39,6 +40,7 @@ export default function FormBegin({ navigation, signup }){
 						secureTextEntry={true} 
 						placeholder='Sua senha ...'
 						autoCapitalize='none' 
+						onChangeText={(password) => setPassword(password)}
 					/>
 					{	signup && <TextInput 
 							style={styles.input} 
@@ -49,7 +51,10 @@ export default function FormBegin({ navigation, signup }){
 							autoCapitalize='none' 
 						/>
 					}
-					<TouchableOpacity style={styles.button} >
+					<TouchableOpacity 
+						style={styles.button}
+						onPress={() => save()}
+					>
 						<Text style={styles.text}>
 							{ signup ? 'Cadastrar' : 'Entrar'}
 						</Text>

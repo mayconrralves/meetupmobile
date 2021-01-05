@@ -9,6 +9,6 @@ const middlewares = [ sagaMiddleware ];
 
 const store = createStore(rootReducer, middlewares);
 
-//sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 export { store };
