@@ -10,10 +10,11 @@ import {
  } from 'react-native';
 
 import Background from '../components/Background';
+import { placeholderColor } from '../components/configuration';
 import Title from './Title';
 
 export default function FormBegin({ navigation, signup, email, password, setEmail, setPassword, save }){
-	const placeholderColor = 'rgba(255,255,255, 0.4)';
+	
 	return (
 		<Background >
 			<View style={styles.main}>
@@ -53,7 +54,7 @@ export default function FormBegin({ navigation, signup, email, password, setEmai
 					}
 					<TouchableOpacity 
 						style={styles.button}
-						onPress={() => save()}
+						onPress={ () => save() }
 					>
 						<Text style={styles.text}>
 							{ signup ? 'Cadastrar' : 'Entrar'}

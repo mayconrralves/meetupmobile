@@ -16,12 +16,16 @@ export function*  auth ( { payload } ){
 			yield put(signFailure());
 			return;
 		}
-		console.warn(csrf)
 		yield put(signSuccess(csrf));
 }
 
 export function* getCsrf(){
-	
+	const csrf = yield call(getCsrfToken);
+		if(csrf.error){
+			yield put(signFailure());
+			return;
+		}
+		yield put(signSuccess(csrf));
 }
 
 export function* signOut(){
