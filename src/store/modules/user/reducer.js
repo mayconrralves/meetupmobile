@@ -7,8 +7,15 @@ const  INITIAL_STATE={
 
 
 export default function user(state=INITIAL_STATE, action){
-	console.warn(action.payload)
 	switch (action.type) {
+		case '@user/CREATE_USER':
+			return produce(state, draft=> {
+				draft.msgFailure='';
+			});
+			case '@user/UPDATE_USER':
+			return produce(state, draft=> {
+				draft.msgFailure='';
+			});
 		case '@user/SUCCESS_REQUEST':
 			return produce(state, draft=>{
 				draft.success = true;

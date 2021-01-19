@@ -12,6 +12,7 @@ export default function auth (state=INITIAL_STATE, action){
 		case '@auth/SIGN_IN_REQUEST':
 			return produce(state, draft=>{
 				draft.loading = true;
+				draft.msgFailure = '';
 			});
 		case '@auth/SIGN_IN_SUCCESS':
 			return produce(state, draft=>{
@@ -23,7 +24,7 @@ export default function auth (state=INITIAL_STATE, action){
 			return produce(state, draft=>{
 				draft.loading = false;
 				draft.signed = false;
-				msgFailure = action.payload.msg;
+				draft.msgFailure = action.payload.msg;
 			});
 		case '@auth/SIGN_OUT': 
 			return produce(state, draft=>{

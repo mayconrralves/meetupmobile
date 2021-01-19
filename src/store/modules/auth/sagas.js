@@ -13,19 +13,22 @@ export function*  auth ( { payload } ){
 		}
 		const csrf = yield call(getCsrfToken);
 		if(csrf.error){
-			yield put(signFailure(response.error));
+			yield put(signFailure(csrf.error));
 			return;
 		}
 		yield put(signSuccess(csrf));
 }
 
 export function* getCsrf(){
-	const csrf = yield call(getCsrfToken);
+	try {
+		const csrf = yield call(getCsrfToken);
 		if(csrf.error){
 			yield put(signFailure(response.error));
 			return;
 		}
 		yield put(signSuccess(csrf));
+	}
+	catch(error){}
 }
 
 export function* signOut(){

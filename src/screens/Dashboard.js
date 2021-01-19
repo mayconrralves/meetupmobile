@@ -31,10 +31,10 @@ export function Dashboard( { meets, getMeets } ) {
 	const [dateActual, setDateActual] = useState(new Date());
 	const isFocused = useIsFocused();
 	const addDate = () => {
-		setDateActual(add(dateActual, { days: 1}));
+		setDateActual(add(dateActual, { days: 1 }));
 	}
 	const subDate = () => {
-		setDateActual(sub(dateActual, { days: 1}))
+		setDateActual(sub(dateActual, { days: 1 }))
 	}
 	const formatedDate = () => {
 		return format(dateActual, "dd/MM/yyyy")
@@ -79,7 +79,7 @@ export function Dashboard( { meets, getMeets } ) {
 		    					/>
 		    					<TouchableOpacity style={styles.buttonModal}
 		    							onPress={() => setModalVisible(!modalVisible)}
-		    						>
+		    					>
 		    						<Text style={styles.textButtonModal}> Ok </Text>
 		    					</TouchableOpacity>
 					      </View>
@@ -87,7 +87,7 @@ export function Dashboard( { meets, getMeets } ) {
 				     
 				     </Modal>
 					<TouchableOpacity
-						onPress={()=> subDate()}
+						onPress={ () => subDate() }
 					>
 						<Icon name='left' size={35} color='#fff'/>
 					</TouchableOpacity>

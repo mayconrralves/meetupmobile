@@ -66,7 +66,7 @@ export  function  Profile({ logout, user, updateUser }) {
 								style={styles.inputSecure}
 								textContentType='password'
 								autoCapitalize='none'
-								secureTextEntry={true} 
+								secureTextEntry={true}
 								placeholder='Nova Senha...'
 								placeholderTextColor={placeholderColor}
 								onChangeText={ password => setPassword(password)}

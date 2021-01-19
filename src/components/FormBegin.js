@@ -20,8 +20,13 @@ export default function FormBegin({
 										setName,
 										setPassword, 
 										setConfirmPassword,
-										save 
+										save,
+										error
 								 }){
+
+	const ifHasAError = () => {
+	  return error ? <Text style={styles.error}>{error}</Text> : null
+	}
 	
 	return (
 		<Background >
@@ -61,6 +66,8 @@ export default function FormBegin({
 							onChangeText={ confirmPassword  => setConfirmPassword(confirmPassword)}
 						/>
 					}
+					{/*If has a error*/}
+					{ ifHasAError() }
 					<TouchableOpacity 
 						style={styles.button}
 						onPress={ () => save() }
@@ -128,5 +135,13 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontSize: 20,
 		fontWeight: 'bold'
+	},
+	error: {
+		color: '#ffe200',
+		fontSize: 22,
+		fontWeight: 'bold',
+		marginBottom: 12,
+		marginHorizontal: 25,
+		textAlign: 'center'
 	}
 });
