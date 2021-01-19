@@ -40,7 +40,7 @@ export  function  Profile({ logout, user, updateUser }) {
 								placeholderTextColor={placeholderColor}
 								placeholder='Nome'
 								defaultValue={user.name}
-								onChangeText={(name)=> setName(name)}
+								onChangeText={ name=> setName(name)}
 							 />
 							<TextInput 
 								style={styles.inputId}
@@ -49,47 +49,49 @@ export  function  Profile({ logout, user, updateUser }) {
 								textContentType='emailAddress'  
 								autoCapitalize='none'
 								defaultValue={user.email}
-								onChangeText={(email)=>setEmail(email)}
+								onChangeText={ email=> setEmail(email)}
 							/>
-					</View>
-					<View style={styles.secure}>
-						<TextInput 
-							style={styles.inputSecure}
-							textContentType='password'
-							autoCapitalize='none'
-							placeholder='Sua Senha...'
-							placeholderTextColor={placeholderColor}
-							onChangeText={(oldPassword) =>setOldPassword(oldPassword)}
-						/>
-						<TextInput 
-							style={styles.inputSecure}
-							textContentType='password'
-							autoCapitalize='none'
-							placeholder='Nova Senha...'
-							placeholderTextColor={placeholderColor}
-							onChangeText={(password) => setPassword(password)}
-						/>
-						<TextInput
-							style={styles.inputSecure}
-							textContentType='password'
-							autoCapitalize='none'
-							placeholder='Digite novamente a nova senha'
-							placeholderTextColor={placeholderColor}
-							onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
-						/>
-						<TouchableOpacity 
-							style={styles.button}
-							onPress={save}
-						 >
-							<Text style={styles.text} >Salvar Perfil</Text>
-						</TouchableOpacity>
-						<TouchableOpacity 
-							style={styles.button}
-							onPress={logout}
-						 >
-							<Text style={styles.text} >Sair do Meetup</Text>
-						</TouchableOpacity>
-					</View>
+						</View>
+						<View style={styles.secure}>
+							<TextInput 
+								style={styles.inputSecure}
+								textContentType='password'
+								autoCapitalize='none'
+								secureTextEntry={true} 
+								placeholder='Sua Senha...'
+								placeholderTextColor={placeholderColor}
+								onChangeText={ oldPassword => setOldPassword(oldPassword)}
+							/>
+							<TextInput 
+								style={styles.inputSecure}
+								textContentType='password'
+								autoCapitalize='none'
+								secureTextEntry={true} 
+								placeholder='Nova Senha...'
+								placeholderTextColor={placeholderColor}
+								onChangeText={ password => setPassword(password)}
+							/>
+							<TextInput
+								style={styles.inputSecure}
+								textContentType='password'
+								autoCapitalize='none'
+								placeholder='Digite novamente a nova senha'
+								placeholderTextColor={placeholderColor}
+								onChangeText={ confirmPassword => setConfirmPassword(confirmPassword)}
+							/>
+							<TouchableOpacity 
+								style={styles.button}
+								onPress={save}
+							 >
+								<Text style={styles.text} >Salvar Perfil</Text>
+							</TouchableOpacity>
+							<TouchableOpacity 
+								style={styles.button}
+								onPress={logout}
+							 >
+								<Text style={styles.text} >Sair do Meetup</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 					
 				</Background>

@@ -7,7 +7,7 @@ export function* createUserRequest( { payload } ){
 	const {name, email, password, confirmPassword } = payload;
 	const response = yield call(createUser, name, email, password, confirmPassword);
 	if(response.error){
-		yield put(failureRequest());
+		yield put(failureRequest(response.error));
 		return;
 	}
 	yield put(successRequest());
@@ -18,7 +18,7 @@ export function* updateUserRequest({ payload }){
 	const response = yield call(updateUser, user, null);
 
 	if(response.error){
-		yield put(failureRequest());
+		yield put(failureRequest(response.error));
 		return;
 	}
 	yield put(successRequest(user));

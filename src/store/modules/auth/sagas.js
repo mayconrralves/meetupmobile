@@ -7,13 +7,13 @@ export function*  auth ( { payload } ){
 		const { email, password } = payload;
 		const  response = yield call(signIn,email,password);
 		if(response.error){
-			yield put(signFailure());
+			yield put(signFailure(response.error));
 			
 				return;
 		}
 		const csrf = yield call(getCsrfToken);
 		if(csrf.error){
-			yield put(signFailure());
+			yield put(signFailure(response.error));
 			return;
 		}
 		yield put(signSuccess(csrf));
@@ -22,7 +22,7 @@ export function*  auth ( { payload } ){
 export function* getCsrf(){
 	const csrf = yield call(getCsrfToken);
 		if(csrf.error){
-			yield put(signFailure());
+			yield put(signFailure(response.error));
 			return;
 		}
 		yield put(signSuccess(csrf));

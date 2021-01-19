@@ -13,7 +13,15 @@ import Background from '../components/Background';
 import { placeholderColor } from '../components/configuration';
 import Title from './Title';
 
-export default function FormBegin({ navigation, signup, email, password, setEmail, setPassword, save }){
+export default function FormBegin({ 
+										navigation, 
+										signup,  
+										setEmail,
+										setName,
+										setPassword, 
+										setConfirmPassword,
+										save 
+								 }){
 	
 	return (
 		<Background >
@@ -23,7 +31,7 @@ export default function FormBegin({ navigation, signup, email, password, setEmai
 						style={styles.input} 
 						placeholderTextColor={placeholderColor}
 						placeholder='Nome'
-						autoCapitalize='none' 
+						onChangeText={ name => setName(name)}
 					/>
 				}
 					<TextInput 
@@ -32,7 +40,7 @@ export default function FormBegin({ navigation, signup, email, password, setEmai
 						textContentType='emailAddress'  
 						placeholder='Seu e-mail...'
 						autoCapitalize='none'
-						onChangeText={(email) => setEmail(email)}
+						onChangeText={email => setEmail(email)}
 					/>
 					<TextInput 
 						style={styles.input} 
@@ -41,15 +49,16 @@ export default function FormBegin({ navigation, signup, email, password, setEmai
 						secureTextEntry={true} 
 						placeholder='Sua senha ...'
 						autoCapitalize='none' 
-						onChangeText={(password) => setPassword(password)}
+						onChangeText={password => setPassword(password)}
 					/>
 					{	signup && <TextInput 
 							style={styles.input} 
 							placeholderTextColor={placeholderColor} 
 							textContentType='newPassword' 
 							secureTextEntry={true} 
-							placeholder='Repita a Senha'
-							autoCapitalize='none' 
+							placeholder='Repita a Senha...'
+							autoCapitalize='none'
+							onChangeText={ confirmPassword  => setConfirmPassword(confirmPassword)}
 						/>
 					}
 					<TouchableOpacity 
@@ -66,7 +75,9 @@ export default function FormBegin({ navigation, signup, email, password, setEmai
 							navigation.navigate('SignUp')
 						}
 					>
-						<Text style={styles.textChangeScreen} >Não tenho Conta</Text>
+						<Text style={styles.textChangeScreen} >
+							{signup ? 'Já tenho conta' : 'Não tenho Conta'}
+						</Text>
 					</TouchableOpacity>
 			</View>
 		</Background>
@@ -80,7 +91,6 @@ const styles = StyleSheet.create({
 		height: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',
-
 	},
 	title: {
 		marginBottom: 40,

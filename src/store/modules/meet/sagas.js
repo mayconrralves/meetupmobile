@@ -5,7 +5,7 @@ import { indexMeet, indexAllMeets } from '../../../api/meet';
 export function* getMeetups(){
 	const response = yield call(indexAllMeets);
 	if(response.error){
-		yield put(failureRequest());
+		yield put(failureRequest(response.error));
 		return;
 	}
 	yield put(successRequest(response));
@@ -13,6 +13,5 @@ export function* getMeetups(){
 
 
 export default all([
-	// takeLatest('@auth/CSRF_UPDATE', getMeetups),
 	takeLatest('@meet/INITIAL_REQUEST', getMeetups),
 ]);

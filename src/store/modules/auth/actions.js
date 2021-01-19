@@ -18,9 +18,10 @@ export function signSuccess(csrf){
 	}
 }
 
-export function signFailure(){
+export function signFailure(msg){
 	return {
-		type: '@auth/SIGN_IN_FAILURE'
+		type: '@auth/SIGN_IN_FAILURE',
+		payload: { msg }
 	}
 }
 

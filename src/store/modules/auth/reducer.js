@@ -3,6 +3,7 @@ const INITIAL_STATE = {
 	loading: false,
 	signed: false,
 	csrf: null,
+	msgFailure: ''
 
 }
 
@@ -22,6 +23,7 @@ export default function auth (state=INITIAL_STATE, action){
 			return produce(state, draft=>{
 				draft.loading = false;
 				draft.signed = false;
+				msgFailure = action.payload.msg;
 			});
 		case '@auth/SIGN_OUT': 
 			return produce(state, draft=>{

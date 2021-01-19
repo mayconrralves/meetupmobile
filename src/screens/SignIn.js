@@ -22,8 +22,6 @@ export  function SignIn(props){
 				setPassword={setPassword} 
 				setEmail={setEmail}
 				save={save}
-				email={email}
-				password={password}
 			/>
 		</Background>
 		)

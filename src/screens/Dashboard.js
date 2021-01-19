@@ -92,7 +92,7 @@ export function Dashboard( { meets, getMeets } ) {
 						<Icon name='left' size={35} color='#fff'/>
 					</TouchableOpacity>
 					<TouchableHighlight
-						onPress={()=>setModalVisible(true)}
+						onPress={()=>setModalVisible(!modalVisible)}
 					>
 						<Text style={styles.textMenu}>
 						{

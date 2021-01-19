@@ -3,7 +3,7 @@ import { produce } from 'immer';
 const INITIAL_STATE = {
 	success: false,
 	meets: [],
-	failure: false,
+	msgFailure: '',
 }
 
 export default function meets(state=INITIAL_STATE, action) {
@@ -11,13 +11,12 @@ export default function meets(state=INITIAL_STATE, action) {
 		case '@meet/SUCCESS_REQUEST':
 			return produce(state, draft=> {
 				draft.success = true;
-				draft.failure = false;
 				draft.meets = action.payload.meets;
 			});
 		case '@meet/FAILURE_REQUEST':
 			return  produce(state, draft=>{
 				draft.success = false;
-				draft.failure = true;
+				draft.msgFailure = action.payload.msg;
 			});
 		
 		default:

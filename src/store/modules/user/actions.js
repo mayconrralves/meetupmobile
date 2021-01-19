@@ -26,6 +26,9 @@ export const successRequest = (user) => {
 	}
 }
 
-export const failureRequest = ()=> {
-	return {type: '@user/FAILURE_REQUEST'}
+export const failureRequest = (msg)=> {
+	return {
+		type: '@user/FAILURE_REQUEST',
+		payload: { msg }
+	}
 }

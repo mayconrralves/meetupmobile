@@ -11,9 +11,10 @@ export function successRequest(meets){
 	}
 }
 
-export function failureRequest(){
+export function failureRequest( msg ){
 	return {
-		type: '@meet/FAILURE_REQUEST'
+		type: '@meet/FAILURE_REQUEST',
+		payload: { msg }
 	}
 }
 
