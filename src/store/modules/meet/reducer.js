@@ -8,10 +8,6 @@ const INITIAL_STATE = {
 
 export default function meets(state=INITIAL_STATE, action) {
 	switch (action.type) {
-		case '@meet/INITIAL_REQUEST':
-			return produce(state, draft => {
-				draft.msgFailure = '';
-			});
 		case '@meet/SUCCESS_REQUEST':
 			return produce(state, draft=> {
 				draft.success = true;
@@ -22,7 +18,10 @@ export default function meets(state=INITIAL_STATE, action) {
 				draft.success = false;
 				draft.msgFailure = action.payload.msg;
 			});
-		
+		case '@user/END_REQUEST':
+			return produce(state, draft=>{
+				draft.success = false;
+			});
 		default:
 			return state;
 	}

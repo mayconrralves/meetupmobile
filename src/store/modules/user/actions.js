@@ -32,3 +32,9 @@ export const failureRequest = (msg)=> {
 		payload: { msg }
 	}
 }
+
+export function endRequest( ) {
+	return {
+		type: '@user/END_REQUEST'
+	}
+}

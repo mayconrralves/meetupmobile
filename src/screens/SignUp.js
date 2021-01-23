@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Background from '../components/Background';
 import FormBegin from '../components/FormBegin';
 import { View, Modal, TouchableOpacity, Text } from 'react-native';
-import { createUser } from '../store/modules/user/actions';
+import { createUser, endRequest } from '../store/modules/user/actions';
 
 export  function SignUp(props){
 		const [modalVisible, setModalVisible] = useState(false);
@@ -11,38 +11,42 @@ export  function SignUp(props){
 		const [password, setPassword ] = useState('');
 		const [name, setName] = useState('');
 		const [confirmPassword, setConfirmPassword] = useState('');
-		const { register, navigation, failure } = props;
+		const { register, navigation, failure, success, finalRequest } = props;
 		const login = () => {
+			setModalVisible(false);
+			finalRequest();
 			navigation.navigate('SignIn');
-			setModalVisible(!modalVisible);
 		}
 		const save = () => {
 			register(name, email, password, confirmPassword);
-			console.warn(failure)
-			if(failure) {
-				setModalVisible(!modalVisible)
-			}
 		}
+		useEffect(()=> {
+			if(success){
+				setModalVisible(true);
+			}
+		},[success]);
 	return (
 		<Background>
-			<Modal
-				        animationType="slide"
-				        transparent={true}
-				        visible={modalVisible}
-				        style={styles.modal}
-				      >
-				      <View style={styles.modalCenter}>
-				      		 <View style={styles.modalView}>
-					      			<Text style={styles.textModal}>Usuário criado com Sucesso!</Text>
-		    					<TouchableOpacity style={styles.buttonModal}
-		    							onPress={login}
-		    					>
-		    						<Text style={styles.textButtonModal}> Entre </Text>
-		    					</TouchableOpacity>
-					      </View>
-				      </View>
-				     
-			</Modal>
+			{
+				<Modal
+							        animationType="slide"
+							        transparent={true}
+							        visible={modalVisible}
+							        style={styles.modal}
+							      >
+							      <View style={styles.modalCenter}>
+							      		 <View style={styles.modalView}>
+								      			<Text style={styles.textModal}>Usuário criado com Sucesso!</Text>
+					    					<TouchableOpacity style={styles.buttonModal}
+					    							onPress={login}
+					    					>
+					    						<Text style={styles.textButtonModal}> Entre </Text>
+					    					</TouchableOpacity>
+								      </View>
+							      </View>
+							     
+						</Modal>
+				}
 			<FormBegin
 				 {...props} 
 				 signup
@@ -99,12 +103,14 @@ const mapStateToProps = state => {
 	const { user } = state;
 	return {
 		failure : user.msgFailure,
+		success: user.success,
 	}
 }
 const mapsDispatchToProps = dispatch => {
 	return {
 		register: (name, email, password, confirmPassword) => 
 					dispatch(createUser( name, email, password, confirmPassword)),
+		finalRequest: () => dispatch(endRequest()),
 	}
 }
 

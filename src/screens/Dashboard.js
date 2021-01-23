@@ -43,7 +43,7 @@ export function Dashboard( { meets, getMeets } ) {
 		return format(
 			zonedTimeToUtc(parseISO(date), 'America/Sao Paulo'),
 			 "dd, 'de' MMMM, '`as', HH'h'", 
-			 { locale: pt}
+			 { locale: pt }
 		)
 	}
 	const dateChoose = (date) => {

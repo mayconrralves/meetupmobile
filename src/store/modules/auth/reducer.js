@@ -12,13 +12,14 @@ export default function auth (state=INITIAL_STATE, action){
 		case '@auth/SIGN_IN_REQUEST':
 			return produce(state, draft=>{
 				draft.loading = true;
-				draft.msgFailure = '';
+				
 			});
 		case '@auth/SIGN_IN_SUCCESS':
 			return produce(state, draft=>{
 				draft.loading = false;
 				draft.signed = true;
 				draft.csrf = action.payload.csrf;
+				draft.msgFailure = '';
 			});
 		case '@auth/SIGN_IN_FAILURE':
 			return produce(state, draft=>{
@@ -30,6 +31,7 @@ export default function auth (state=INITIAL_STATE, action){
 			return produce(state, draft=>{
 				draft.signed = false;
 				draft.csrf = null;
+				draft.msgFailure = '';
 			});
 		default: return state;
 		}
