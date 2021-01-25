@@ -12,6 +12,7 @@ import SignUp from '../screens/SignUp';
 import Dashboard from '../screens/Dashboard';
 import Profile from '../screens/Profile';
 import Enrollment from '../screens/Enrollment';
+
 export function Navigation({ getCsrf, csrf }){
 	const signin = false;
 	const Stack = createStackNavigator();

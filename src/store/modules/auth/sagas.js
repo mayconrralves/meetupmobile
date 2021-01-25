@@ -8,8 +8,7 @@ export function*  auth ( { payload } ){
 		const  response = yield call(signIn,email,password);
 		if(response.error){
 			yield put(signFailure(response.error));
-			
-				return;
+			return;
 		}
 		const csrf = yield call(getCsrfToken);
 		if(csrf.error){
@@ -28,7 +27,10 @@ export function* getCsrf(){
 		}
 		yield put(signSuccess(csrf));
 	}
-	catch(error){}
+	catch(error){
+		yield put(signFailure(response.error));
+		return;
+	}
 }
 
 export function* signOut(){

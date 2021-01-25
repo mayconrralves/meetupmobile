@@ -17,7 +17,7 @@ export const signIn = async (email, password)=>{
 		});
 		return result.data;
 	}catch(error){
-			return error.response.data;
+			return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -28,9 +28,8 @@ export const getCsrfToken = async () => {
 		api.defaults.headers.put['X-CSRF-Token'] = data.csrf;
 		api.defaults.headers.delete['X-CSRF-Token'] = data.csrf;
 		return data.csrf;
-
 	}catch(error){
-		return error.response.data;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -39,6 +38,6 @@ export const logout = async () => {
 		await api.get('/logout');
 	}
 	catch(error){
-		return error.response;
+		return error.message;
 	}
 }
