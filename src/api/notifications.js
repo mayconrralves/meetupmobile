@@ -8,7 +8,7 @@ export const notificationsIndex = async () => {
 		return data;
 
 	}catch(error){
-		return error.response;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -22,6 +22,6 @@ export const notificationsUpdate = async (id) => {
 		return data ;
 
 	}catch(error){
-		return error.response;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }

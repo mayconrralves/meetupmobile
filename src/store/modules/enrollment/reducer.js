@@ -2,23 +2,23 @@ import { produce } from 'immer';
 
 const INITIAL_STATE = {
 	success: false,
-	meets: [],
+	enrollment: [],
 	msgFailure: '',
 }
 
-export default function meets(state=INITIAL_STATE, action) {
+export default function enrollments(state=INITIAL_STATE, action) {
 	switch (action.type) {
-		case '@meet/SUCCESS_REQUEST':
+		case '@enrollment/SUCCESS_REQUEST':
 			return produce(state, draft=> {
 				draft.success = true;
-				draft.meets = action.payload.meets;
+				draft.enrollments = action.payload.enrollments;
 			});
-		case '@meet/FAILURE_REQUEST':
+		case '@enrollment/FAILURE_REQUEST':
 			return  produce(state, draft=>{
 				draft.success = false;
 				draft.msgFailure = action.payload.msg;
 			});
-		case '@meet/END_REQUEST':
+		case '@enrollment/END_REQUEST':
 			return produce(state, draft=>{
 				draft.success = false;
 			});
@@ -26,4 +26,3 @@ export default function meets(state=INITIAL_STATE, action) {
 			return state;
 	}
 }
-

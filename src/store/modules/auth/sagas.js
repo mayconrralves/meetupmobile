@@ -22,13 +22,13 @@ export function* getCsrf(){
 	try {
 		const csrf = yield call(getCsrfToken);
 		if(csrf.error){
-			yield put(signFailure(response.error));
+			yield put(signFailure(csrf.error));
 			return;
 		}
 		yield put(signSuccess(csrf));
 	}
 	catch(error){
-		yield put(signFailure(response.error));
+		yield put(signFailure(error));
 		return;
 	}
 }

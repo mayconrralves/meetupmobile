@@ -8,7 +8,7 @@ export const createEnrollment = async (id) => {
 
 		return data;
 	}catch(error){
-		return error.response;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -20,7 +20,7 @@ export const canceledEnrollment = async (idMeet) => {
 		return data;
 
 	}catch(error){
-		return error.response;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -36,6 +36,6 @@ export const indexEnrollment = async (date='2020-12-01T00:00:00', page=1) => {
 		return data;
 
 	}catch(error){
-		return error.response;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }

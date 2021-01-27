@@ -5,7 +5,7 @@ export const indexMeet = async() => {
 		const { data } = await api.get('/meet/index');
 		return data;
 	}catch(error){
-		return error.response.data;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -16,7 +16,7 @@ export const addBanner = async (file) => {
 		const  { data }  = await api.post('/meet/banner', formData);
 		return data;
 	}catch(error){
-		return error.response.data;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -32,7 +32,7 @@ export const createMeet = async ( { title, localization, description, date, bann
 
 		return data;
 	}catch(error){
-		return error.response.data;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -49,7 +49,7 @@ export const updateMeet = async (id, meet) => {
 		return data;
 		
 	}catch(error){
-		return  error.response.data;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -60,7 +60,7 @@ export const deleteMeet = async (id) => {
 		});
 		return data;
 	}catch(error){
-		return  error.response.data;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
@@ -69,7 +69,7 @@ export const indexAllMeets = async ()=> {
 		const { data } = await api.get('/meets/all');
 		return data;
 	}catch(error) {
-		return  error.response.data;
+		return error.response ? error.response.data : {'error':error.message};
 	}
 }
 
