@@ -7,5 +7,5 @@ import user from './user/reducer';
 import enrollment from './enrollment/reducer';
 
 export default combineReducers({
-	auth, meet, user
+	auth, meet, user, enrollment
 });

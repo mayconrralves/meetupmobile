@@ -5,5 +5,5 @@ import user from './user/sagas';
 import enrollment from './enrollment/sagas';
 
 export default function* rootSaga(){
-	return yield all( [ auth, user,  meet ] );
+	return yield all( [ auth, user,  meet, enrollment ] );
 }

@@ -1,6 +1,16 @@
 import { all, takeLatest, put, call} from 'redux-saga/effects';
 import {signIn, getCsrfToken, logout, getUser } from '../../../api/session';
-import { signSuccess, signFailure } from './actions';
+import { signSuccess, signFailure, csrfFailure } from './actions';
+
+
+export function* getCsrf(){
+		const csrf = yield call(getCsrfToken);
+		if(csrf.error){
+			yield put(csrfFailure(csrf.error));
+			return;
+		}
+		yield put(signSuccess(csrf));
+}
 
 export function*  auth ( { payload } ){
     
@@ -10,27 +20,7 @@ export function*  auth ( { payload } ){
 			yield put(signFailure(response.error));
 			return;
 		}
-		const csrf = yield call(getCsrfToken);
-		if(csrf.error){
-			yield put(signFailure(csrf.error));
-			return;
-		}
-		yield put(signSuccess(csrf));
-}
-
-export function* getCsrf(){
-	try {
-		const csrf = yield call(getCsrfToken);
-		if(csrf.error){
-			yield put(signFailure(csrf.error));
-			return;
-		}
-		yield put(signSuccess(csrf));
-	}
-	catch(error){
-		yield put(signFailure(error));
-		return;
-	}
+		yield getCsrf();
 }
 
 export function* signOut(){
@@ -38,7 +28,7 @@ export function* signOut(){
 }
 
 export default all([
-	takeLatest('@auth/SIGN_IN_REQUEST', auth),
+	takeLatest('@auth/SIGN_REQUEST', auth),
 	takeLatest('@auth/CSRF_UPDATE', getCsrf),
 	takeLatest('@auth/SIGN_OUT', signOut),
 ]);

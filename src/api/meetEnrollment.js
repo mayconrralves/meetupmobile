@@ -24,7 +24,7 @@ export const canceledEnrollment = async (idMeet) => {
 	}
 }
 
-export const indexEnrollment = async (date='2020-12-01T00:00:00', page=1) => {
+export const indexEnrollment = async (date, page) => {
 	try {
 		const { data } = await api.get('/meet/enrollment/index', {
 			params: {

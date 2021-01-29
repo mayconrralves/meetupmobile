@@ -8,13 +8,13 @@ const INITIAL_STATE = {
 
 export default function auth (state=INITIAL_STATE, action){
 	switch(action.type){
-		case '@auth/SIGN_IN_SUCCESS':
+		case '@auth/SIGN_SUCCESS':
 			return produce(state, draft=>{
 				draft.signed = true;
 				draft.csrf = action.payload.csrf;
 				draft.msgFailure = '';
 			});
-		case '@auth/SIGN_IN_FAILURE':
+		case '@auth/SIGN_FAILURE':
 			return produce(state, draft=>{
 				draft.signed = false;
 				draft.msgFailure = action.payload.msg;

@@ -6,7 +6,8 @@ import { useIsFocused } from '@react-navigation/native';
 import { format, add, sub, isPast, isToday, parseISO, isSameDay } from 'date-fns';
 import { zonedTimeToUtc  } from 'date-fns-tz';
 import  pt  from 'date-fns/locale/pt-BR';
-import { requestMeetups} from '../store/modules/meet/actions';
+import { requestMeetups } from '../store/modules/meet/actions';
+import { requestSetEnrollment } from '../store/modules/enrollment/actions';
 
 
 import { 
@@ -25,7 +26,7 @@ import Background from '../components/Background';
 import Header from '../components/Header';
 
 
-export function Dashboard( { meets, getMeets } ) {
+export function Dashboard( { meets, enrollements, getMeets, createEnroll  } ) {
 	
 	const [modalVisible, setModalVisible] = useState(false);
 	const [dateActual, setDateActual] = useState(new Date());
@@ -39,18 +40,20 @@ export function Dashboard( { meets, getMeets } ) {
 	const formatedDate = () => {
 		return format(dateActual, "dd/MM/yyyy")
 	}
-	const formatedDateText = (date) => {
+	const formatedDateText = date => {
 		return format(
 			zonedTimeToUtc(parseISO(date), 'America/Sao Paulo'),
 			 "dd, 'de' MMMM, '`as', HH'h'", 
 			 { locale: pt }
 		)
 	}
-	const dateChoose = (date) => {
+	const dateChoose = date => {
 		if(!isPast(date) || isToday(date)) {
 			setDateActual(date);
 		}
 	}
+	const addEnrollment = id => createEnroll(id);
+	
 	useEffect(()=> {
 		if(isFocused) {
 			getMeets();
@@ -125,7 +128,10 @@ export function Dashboard( { meets, getMeets } ) {
 										<Text style={styles.text}>{meet.title}</Text>
 										<Text style={styles.text}>{meet.description}</Text>
 										<Text style={styles.text}>{meet.localization}</Text>
-										<TouchableOpacity style={styles.button}>
+										<TouchableOpacity 
+											style={styles.button}
+											onPress={() => addEnrollment(meet.id)}
+										>
 											<Text 
 												style={styles.textButton}
 											>
@@ -236,15 +242,17 @@ const styles = {
 };
 
 const mapsStateToProps = state => {
-	const { meet } = state;
+	const { meet, enrollment } = state;
 	return {
 		meets: meet.meets, 
+		enrollments: enrollment.enrollments,
 	}
 }
 
 const mapsDispatchToProps = dispatch => {
 	return {
 		getMeets: () => dispatch(requestMeetups()),
+		createEnroll: id => dispatch(requestSetEnrollment(id)),
 	}
 }
 

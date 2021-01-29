@@ -27,10 +27,13 @@ export function* updateUserRequest({ payload }){
 
 export function* getUserRequest(){
 	const user = yield call(getUser);
+	if(user.error) {
+		yield put(failureRequest(user.error));
+	}
 	yield put(successRequest(user));
 }
 export default all([
 		takeLatest('@user/CREATE_USER', createUserRequest),
 		takeLatest('@user/UPDATE_USER', updateUserRequest),
-		takeLatest('@auth/SIGN_IN_SUCCESS', getUserRequest),
+		takeLatest('@auth/SIGN_SUCCESS', getUserRequest),
 	]);

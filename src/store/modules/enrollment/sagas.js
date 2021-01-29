@@ -1,15 +1,47 @@
 import { all, takeLatest, put, call} from 'redux-saga/effects';
+import { 
+		createEnrollment, 
+		canceledEnrollment,
+		indexEnrollment,
+		successRequestCreateEnrollment,
+		successRequestDeleteEnrollment
+}from '../../../api/meetEnrollment';
+import { successRequest, failureRequest } from './actions';
+export  function* getEnrollments({ payload }) {
+	const { date, page } = payload;
 
-export  function* getEnrollments() {
-
+	const enrollments = yield call(indexEnrollment, date, page);
+	if(enrollments.error){
+		yield put(failureRequest(enrollment.error));
+		return;
+	}
+	yield put(successRequest(enrollments));
 }
-export function* createEnrollment(){
-
+export function* setEnrollment({ payload }){
+	const { id } = payload;
+	const enroll = yield call(createEnrollment, id);
+	if(enroll.error) {
+		yield put(failureRequest(enroll.error));
+		return;
+	}
+	yield put(successRequestCreateEnrollment());
+	yield getEnrollments();
 }
 
-export function* removeEnrollment(){
-
+export function* removeEnrollment({ payload }){
+	const { id } = payload;
+	const deleteEnroll = yield call(canceledEnrollment,id);
+	if(deleteEnroll.error) {
+		yield put(failureRequest(deleteEnroll));
+		return;
+	}
+	yield put(successRequestDeleteEnrollment());
+	yield getEnrollments();
 }
 
 
-export default all ([]);
+export default all ([
+	takeLatest('@enrollment/GET_INITIAL_REQUEST', getEnrollments),
+	takeLatest('@enrollment/SET_INITIAL_REQUEST', setEnrollment),
+	takeLatest('@enrollment/DELETE_INITIAL_REQUEST', removeEnrollment),
+	]);
