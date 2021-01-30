@@ -1,15 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign'
-import { connect } from 'react-redux';
-import DatePicker from 'react-native-date-picker';
-import { useIsFocused } from '@react-navigation/native';
-import { format, add, sub, isPast, isToday, parseISO, isSameDay } from 'date-fns';
-import { zonedTimeToUtc  } from 'date-fns-tz';
-import  pt  from 'date-fns/locale/pt-BR';
-import { requestMeetups } from '../store/modules/meet/actions';
-import { requestSetEnrollment } from '../store/modules/enrollment/actions';
-
-
 import { 
 	ScrollView,
 	View,
@@ -22,9 +11,20 @@ import {
 	StyleSheet
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/AntDesign'
+import { connect } from 'react-redux';
+import DatePicker from 'react-native-date-picker';
+import { useIsFocused } from '@react-navigation/native';
+import { format, add, sub, isPast, isToday, parseISO, isSameDay } from 'date-fns';
+import { zonedTimeToUtc  } from 'date-fns-tz';
+import  pt  from 'date-fns/locale/pt-BR';
+import { requestMeetups } from '../store/modules/meet/actions';
+
+
+
 import Background from '../components/Background';
 import Header from '../components/Header';
-
+import { requestSetEnrollment } from '../store/modules/enrollment/actions';
 
 export function Dashboard( { meets, enrollements, getMeets, createEnroll  } ) {
 	

@@ -12,7 +12,7 @@ export const createEnrollment = async (id) => {
 	}
 }
 
-export const canceledEnrollment = async (idMeet) => {
+export const cancelledEnrollment = async (idMeet) => {
 	try {
 		const  { data } = await api.put('/meet/enrollment/update', null, {
 			params: { id : idMeet},

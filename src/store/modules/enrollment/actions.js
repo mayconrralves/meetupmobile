@@ -12,7 +12,7 @@ export function requestSetEnrollment( id ){
 	}
 }
 
-export function requestDeleteMeetups( id ){
+export function requestDeleteEnrollment( id ){
 	return {
 		type: '@enrollment/DELETE_INITIAL_REQUEST',
 		payload: { id },

@@ -2,14 +2,13 @@ import { produce } from 'immer';
 
 const INITIAL_STATE = {
 	success: false,
-	enrollments: [1],
+	enrollments: [],
 	msgFailure: '',
 	createEnrollment: false,
 	deleteEnrollment: false,
 }
 
 export default function enrollments(state=INITIAL_STATE, action) {
-	console.warn(action)
 	switch (action.type) {
 		case '@enrollment/SUCCESS_REQUEST':
 			return produce(state, draft=> {
