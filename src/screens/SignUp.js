@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Background from '../components/Background';
 import FormBegin from '../components/FormBegin';
@@ -6,15 +7,15 @@ import { View, Modal, TouchableOpacity, Text } from 'react-native';
 import { createUser, endRequest } from '../store/modules/user/actions';
 
 export  function SignUp(props){
+		const { register, navigation, failure, success, clearRequest } = props;
 		const [modalVisible, setModalVisible] = useState(false);
 		const [email, setEmail] = useState('');
 		const [password, setPassword ] = useState('');
 		const [name, setName] = useState('');
 		const [confirmPassword, setConfirmPassword] = useState('');
-		const { register, navigation, failure, success, finalRequest } = props;
 		const login = () => {
 			setModalVisible(false);
-			finalRequest();
+			clearRequest();
 			navigation.navigate('SignIn');
 		}
 		const save = () => {
@@ -110,7 +111,7 @@ const mapsDispatchToProps = dispatch => {
 	return {
 		register: (name, email, password, confirmPassword) => 
 					dispatch(createUser( name, email, password, confirmPassword)),
-		finalRequest: () => dispatch(endRequest()),
+		clearRequest: () => dispatch(endRequest()),
 	}
 }
 

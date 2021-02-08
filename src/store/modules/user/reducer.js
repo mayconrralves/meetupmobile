@@ -22,6 +22,8 @@ export default function user(state=INITIAL_STATE, action){
 		case '@user/END_REQUEST':
 			return produce(state, draft=>{
 				draft.success = false;
+				draft.user = null;
+				draft.msgFailure = '';
 			});
 		default:
 			return state;

@@ -1,5 +1,5 @@
 import { all, takeLatest, put, call} from 'redux-saga/effects';
-import { successRequest, failureRequest } from './actions';
+import { successRequest, failureRequest, endRequest } from './actions';
 import { getUser } from '../../../api/session';
 import { updateUser, createUser } from '../../../api/user';
 
@@ -32,8 +32,14 @@ export function* getUserRequest(){
 	}
 	yield put(successRequest(user));
 }
+
+export function* clearUser(){
+	yield put(endRequest());
+}
+
 export default all([
 		takeLatest('@user/CREATE_USER', createUserRequest),
 		takeLatest('@user/UPDATE_USER', updateUserRequest),
 		takeLatest('@auth/SIGN_SUCCESS', getUserRequest),
+		takeLatest('@auth/SIGN_OUT', clearUser)
 	]);
